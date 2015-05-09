@@ -33,7 +33,7 @@ str(data)
 ```
   
 ## 2.Mean total steps taken per day  
-A new data frame is created df_1steps. The rows with NA are filtered out, it is grouped by the date and then the steps are summarized.A histogram is created (the breaks are arbitrarily set to 25).  Then the mean and median are calculated.  
+A new data frame is created df_1steps. The rows with NA are filtered out, it is grouped by the date and then the steps are summarized. This was done with ` dplyr`A histogram is created (the breaks are arbitrarily set to 25).  Then the mean and median are calculated.  
 ```{r, echo=TRUE}
 df1_steps <- data %>%
         filter(!is.na(steps)) %>%
@@ -54,7 +54,7 @@ median_step.day
 The mean steps per day is **10766** , and the median is **10765** .  
 
 ##3. Average Daily Activity  
-A second data frame is created df_2avgsteps. The missing values are filtered out. Now it is grouped by interval and the average of the steps is formed. A plot is  then constructed with type="l". Finally the interval which on average contains the highest number of steps is determined.
+A second data frame is created df_2avgsteps. The missing values are filtered out. Now it is grouped by interval and the average of the steps is formed. A plot is  then constructed with `type="l"`. Finally the interval which on average contains the highest number of steps is determined.
 
 ```{r,echo=TRUE}
 df2_avgSteps <- data %>%
@@ -73,7 +73,7 @@ df2_avgSteps[which.max(df2_avgSteps$steps),]
 The Interval with the highest number steps is **835**.
 
 ##4. Imputing Missing Data:  
-A third data frame is constructed df2_steps. This data frame has a fourth variable-steps.recode. The NA'S in the variable steps are replaced with 37. this is the mean value of all the steps variable.  It was determined in the 5 number summary obtained in the exploratory data section of this project.  This was done with the ** ifelse function**. Using this function allows this to be done without the use of **for** loop, **if** conditionals and **indexing**. A histogram was then constructed and the mean and median values determined as was done in the **Mean Total Steps Taken** section.  
+A third data frame is constructed df2_steps. This data frame has a fourth variable-steps.recode. The NA'S in the variable steps are replaced with 37. this is the mean value of all the steps variable.  It was determined in the 5 number summary obtained in the exploratory data section of this project.  This was done with the  `ifelse`. Using this function allows this to be done without the use of `for` loop, `if` conditionals and **indexing**. A histogram was then constructed and the mean and median values determined as was done in the **Mean Total Steps Taken** section.  
 
 ```{r,echo=TRUE}
 data$steps.recode<-ifelse(is.na(data$steps),37,data$steps)
@@ -100,7 +100,7 @@ The mean steps per day is `r mean_steps.day` , and the median is `r median_steps
 ***Imputing the missing values in this manner made only minimal difference.***  
 
 ##5. Activity Patterns Weekdays and Weekends:  
-A new variable "day" is added to the data frame data. This is created by extracting the day of the week from the POSIXct date with wday().(Day = 01-07(Sunday=1)) It is converted to a factor with two levels "weekend" and "weekday". The data is again grouped by interval and day and summarized at steps.recode. The variable "day" is used as a facet in ggplot to show the difference in the pattern.  
+A new variable "day" is added to the data frame data. This is created by extracting the day of the week from the `POSIXct` date with `wday()`.(Day = 01-07(Sunday=1)) It is converted to a factor with two levels "weekend" and "weekday". The data is again grouped by interval and day and summarized at steps.recode. The variable "day" is used as a facet in `ggplot` to show the difference in the pattern.  
 
 ```{r,echo=TRUE}
 
