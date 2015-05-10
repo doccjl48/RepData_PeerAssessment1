@@ -181,6 +181,16 @@ df2_avgSteps[which.max(df2_avgSteps$steps),]
 The Interval with the highest number steps is **835**.
 
 ##4. Imputing Missing Data:  
+
+The number of missing values was calculted earlier in the exploratory phase in the 5 number summary `summary()`. It was found to be **2304**.This is confirmed with the following code.
+
+```r
+missing<-is.na(data$steps)
+missing_na<-sum(missing)
+```
+This confirms that the number of `NA` is: 2304
+
+
 A third data frame is constructed df2_steps. This data frame has a fourth variable-steps.recode. The NA'S in the variable steps are replaced with 37. this is the mean value of all the steps variable.  It was determined in the 5 number summary obtained in the exploratory data section of this project.  This was done with the  `ifelse`. Using this function allows this to be done without the use of `for` loop, `if` conditionals and **indexing**. A histogram was then constructed and the mean and median values determined as was done in the **Mean Total Steps Taken** section.  
 
 
@@ -192,7 +202,7 @@ df2_steps <- data %>%
 hist(df2_steps$steps.recode, breaks=25, col="grey", main="Steps/Day", xlab="steps/day", sub="missing values imputed")
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
+![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png) 
 
 ***Mean and median:***  
 
@@ -229,7 +239,7 @@ g<-ggplot(data=df3_avgSteps, aes(x=interval,y=steps.recode, color=day))
 g + geom_line()+facet_grid(day~.) + ggtitle("Activity (weekend v. weekday)")
 ```
 
-![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png) 
+![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14-1.png) 
   
   
 The pattern of avtivity does appear different during the week as opposed to the weekend. Weekdays appear to have a spike in activity at one point, but lower overall activity during the day. Weekends do not have this spike, but have lower overall activity.
